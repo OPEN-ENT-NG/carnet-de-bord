@@ -1,0 +1,101 @@
+<div class="widget logbook-widget">
+
+    <h1><i18n>logBook.title</i18n></h1>
+    <div class="logbook-child" ng-if="widget.model.me.type === 'ELEVE'">
+        i'm a child
+        <h2 ng-repeat="eleve in widget.eleves"><span>[[ widget.getTag('Prenom', eleve) ]]</span></h2>
+    </div>
+
+    <div class="logbook-child" ng-if="widget.model.me.profiles.indexOf('Relative') >= 0 && widget.eleves.length === 1">
+        i'm parent, got one child
+        <h2 ng-repeat="eleve in widget.eleves"><span>[[ widget.getTag('Prenom', eleve) ]]</span></h2>
+    </div>
+
+    <div class="logbook-children" ng-if="widget.model.me.profiles.indexOf('Relative') >= 0 && widget.eleves.length > 1">
+        i'm parent, got many children
+        <h2 ng-repeat="eleve in widget.eleves">
+            <img ng-src="/userbook/avatar/cec566f8-b15d-4c85-b152-bda85cf1bf9c?thumbnail=100x100"/>
+            <!-- <h3>[[ widget.model.me.childrenIds[0]]]</h3> -->
+            <span>[[ widget.getTag('Prenom', eleve) ]]</span>
+        </h2>
+    </div>
+
+
+    <div class="" ng-repeat="eleve in widget.eleves">
+
+        <span>[[ widget.getTag('Prenom', eleve) ]]</span>
+
+        <div class="logbook-content">
+
+            <div class="logbook-sections tickets-cards">
+                <div class="ticket-card"
+                        ng-class="{'empty': !contentType.compact }"
+                        ng-repeat="contentType in widget.contentTypes"
+                        ng-init="contentType.getContent(eleve)"
+                        tooltip="logBook.[[contentType.title]].tooltip">
+
+                    <div ng-click="widget.openLightBox(contentType, eleve)" >
+
+                        <figure ng-class="'shade-color-'+$index">
+                            <i class="[[contentType.icon]]"></i>
+                        </figure>
+                        <section>
+                            <h5 translate content="logBook.[[contentType.title]]"></h5>
+                            <p ng-if="contentType.compact">
+                                [[contentType.compact]]
+                            </p>
+                            <em class="low-importance" ng-if="!contentType.compact">
+                                <i18n>logBook.empty</i18n>
+                            </em>
+                        </section>
+                        <i class="dotsx3" ng-if="contentType.compact"></i>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <lightbox show="widget.showLightbox" on-close="widget.showLightbox = false">
+        <div ng-init="currentContentType.getContent(currentEleve)">
+
+            <h2>
+                <span translate content="[[widget.currentContentType.lightboxTitle]]"></span>
+                <span ng-if="!widget.model.me.type === 'ELEVE'">
+                    <i18n>logBook.of</i18n>
+                    [[widget.getTag('Prenom', widget.currentEleve)]]
+                </span>
+            </h2>
+            <!-- <h2>
+                <a href="[[ item.pageURL ]]"></a>
+                [[ item.title ]]
+                <i class="new-window"></i>
+            </h2> -->
+
+            <article>
+                <div ng-repeat="item in widget.currentContentType.full">
+
+                    <p class="" ng-if="!item.subsections">
+                        <span>•</span>[[ item.value ]]
+                    </p>
+
+
+                    <h4 ng-if="item.subsections">[[ item.value ]]</h4>
+                    <div ng-if="item.subsections">
+                        <section ng-repeat="subsection in item.subsections">
+                            <b>[[ subsection.header ]]</b> <br>
+                            <span>
+                                [[ subsection.content ]]
+                            </span>
+                        </section>
+                    </div>
+
+                </div>
+            </article>
+
+        </div>
+    </lightbox>
+
+</div>

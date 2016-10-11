@@ -1,0 +1,33 @@
+{
+    "logBook.title": "Carnet de bord",
+    "logBook.empty": "vide",
+
+    "logBook.lateness": "Retards non justifiés",
+    "logBook.absences": "Absences non justifiées",
+    "logBook.grades": "Notes",
+    "logBook.diary": "Cahier de textes",
+    "logBook.skills": "Compétences aquises",
+
+    "logBook.lateness.all": "Tous les retards non justifiés",
+    "logBook.absences.all": "Toutes les absences non justifiées",
+    "logBook.grades.all": "Toutes les notes",
+    "logBook.diary.all": "Tous les devoirs",
+    "logBook.skills.all": "Toutes les compétences aquises",
+
+    "logBook.lateness.tooltip": "Voir tous les retards non justifiés",
+    "logBook.absences.tooltip": "Voir toutes les absences non justifiées",
+    "logBook.grades.tooltip": "Voir toutes les notes",
+    "logBook.diary.tooltip": "Voir tous les devoirs",
+    "logBook.skills.tooltip": "Voir toutes les compétences aquises",
+
+    "logBook.skills.item": "Contenu de l'item",
+
+    "logBook.of": "de",
+    "logBook.in": "en",
+    "logBook.the": "le",
+    "logBook.from": "du",
+    "logBook.to": "au",
+    "logBook.since": "depuis le",
+    "logBook.for": "pour le",
+    "logBook.new.homework": "Travail en"
+}
