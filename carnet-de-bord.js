@@ -18,6 +18,13 @@ widget.getTag = function(tagName, xml){
     return $(xml).find(tagName).text()
 }
 
+// widget.parentInfos = function(){
+//     return widget.model.me.childrenIds
+// }
+// http().get('/userbook/api/person?id='+childId)
+//     .done(function(childInfos){
+//         });
+// })
 
 widget.contentTypes = [
     {
@@ -25,12 +32,14 @@ widget.contentTypes = [
         icon: "timer-off",
         compact: "",
         full: [],
-        getContent: function(eleve){
+        getContent: function(myeleve){
 
             var that = this
-            delays = $(eleve).find('Retard Justifie')
+            var delays = $(myeleve).find('Retard Justifie')
             var latedate = false;
-            allDelays = []
+            var allDelays = []
+            that.compact = false;
+            that.full = false;
 
             if (delays) {
                 delays.each(function(i, delay){
@@ -42,7 +51,6 @@ widget.contentTypes = [
                             value : latedate
                         });
                         that.compact = allDelays[0].value
-
                     }
                 })
                 that.full = allDelays
@@ -55,12 +63,14 @@ widget.contentTypes = [
         icon: "nobody",
         compact: "",
         full: [],
-        getContent: function(eleve){
+        getContent: function(myeleve){
 
             var that = this
             var allAbsences = []
+            that.compact = false;
+            that.full = false;
 
-            absences = $(eleve).find('Absence Justifie')
+            var absences = $(myeleve).find('Absence Justifie')
 
             if(absences){
                 absences.each(function(i, absence){
@@ -69,26 +79,25 @@ widget.contentTypes = [
 
                         if($(absence).parent().find('EstOuverte').text()==="false"){
                             // du... au...
-                            startdate = $(absence).parent().find('DateDebut').text();
-                            enddate = $(absence).parent().find('DateFin').text();
+                            var startdate = $(absence).parent().find('DateDebut').text();
+                            var enddate = $(absence).parent().find('DateFin').text();
                             startdate = moment(startdate);
                             enddate = moment(enddate);
                             startdate = startdate.format('DD/MM/YYYY HH:mm');
                             enddate = enddate.format('DD/MM/YYYY HH:mm');
 
-                            absDate = lang.translate('logBook.from')+" "+startdate +" "+lang.translate('logBook.to')+" "+enddate;
+                            var absDate = lang.translate('logBook.from')+" "+startdate +" "+lang.translate('logBook.to')+" "+enddate;
                         }else {
-                            absDate = $(absence).parent().find('DateDebut').text()
+                            var absDate = $(absence).parent().find('DateDebut').text()
                             absDate = moment(absDate);
                             absDate = absDate.format('DD/MM/YYYY HH:mm');
                             absDate = lang.translate('logBook.the')+" "+  absDate;
                         }
+                        allAbsences.push({
+                            value : absDate
+                        });
+                        that.compact = allAbsences[0].value
                     }
-                    allAbsences.push({
-                        value : absDate
-                    });
-                    that.compact = allAbsences[0].value
-
                 })
                 that.full = allAbsences
             }
@@ -101,22 +110,24 @@ widget.contentTypes = [
         icon: "grades",
         compact: "",
         full: [],
-        getContent: function(eleve){
+        getContent: function(myeleve){
 
             var that = this
             var allGrades = []
+            that.compact = false;
+            that.full = false;
 
-            var isnote = $(eleve).find('PageReleveDeNotes Devoir Note').text();
+            var isnote = $(myeleve).find('PageReleveDeNotes Devoir Note').text();
             if(isnote){
-                var lastNotes = $(eleve).find('PageReleveDeNotes Devoir')
+                var lastNotes = $(myeleve).find('PageReleveDeNotes Devoir')
 
                 lastNotes.each(function(i, result){
-                    note = $(result).find('Note').text();
-                    bareme = $(result).find('Bareme').text();
-                    matiere = $(result).find('Matiere').text();
-                    notedate = moment($(result).find('Date').text());
+                    var note = $(result).find('Note').text();
+                    var bareme = $(result).find('Bareme').text();
+                    var matiere = $(result).find('Matiere').text();
+                    var notedate = moment($(result).find('Date').text());
                     notedate = notedate.format('DD/MM/YYYY');
-                    grade = note+"/"+bareme+" "+lang.translate('logBook.in')+" "+matiere+" "+lang.translate('logBook.the')+" "+notedate;
+                    var grade = note+"/"+bareme+" "+lang.translate('logBook.in')+" "+matiere+" "+lang.translate('logBook.the')+" "+notedate;
 
                     allGrades.push({
                         value : grade
@@ -135,15 +146,17 @@ widget.contentTypes = [
         icon: "homeworks",
         compact: "",
         full: [],
-        getContent: function(eleve, compact){
+        getContent: function(myeleve, compact){
 
             var that = this
             var allWorks = []
+            that.compact = false;
+            that.full = false;
 
-            var iswork = $(eleve).find('PageCahierDeTextes CahierDeTextes TravailAFaire Descriptif').text()
+            var iswork = $(myeleve).find('PageCahierDeTextes CahierDeTextes TravailAFaire Descriptif').text()
             if (iswork) {
 
-                var diaries = $(eleve).find('PageCahierDeTextes CahierDeTextes');
+                var diaries = $(myeleve).find('PageCahierDeTextes CahierDeTextes');
                 $(diaries).each(function(i, diary){
                     if ($(diary).find('TravailAFaire Descriptif').text()) {
 
@@ -183,16 +196,18 @@ widget.contentTypes = [
         icon: "trending-up",
         compact: "",
         full: [],
-        getContent: function(eleve){
+        getContent: function(myeleve){
 
             var that = this
             var allSkills = []
             var subsections = []
+            that.compact = false;
+            that.full = false;
 
-            var isSkill = $(eleve).find('PageCompetences Competence').text();
+            var isSkill = $(myeleve).find('PageCompetences Competence').text();
 //  !!! if Item
             if (isSkill) {
-                var skills = $(eleve).find('PageCompetences Competence').parent()
+                var skills = $(myeleve).find('PageCompetences Competence').parent()
                 skills.each(function(i, skill){
                     if ($(skill).find('Libelle').text()==="Acquis") {
                         var title = $(skill).find('Intitule').text()
@@ -242,13 +257,23 @@ widget.contentTypes = [
 
 widget.showLightbox = false
 
-widget.openLightBox = function(contentType, eleve){
-    widget.currentContentType = contentType
-    widget.currentEleve = eleve
-
-    //if []!empty
-        widget.showLightbox = true
+widget.getEleve = function(eleve){
+    widget.myeleve = eleve
+    widget.contentTypes.forEach(function(type){
+       type.getContent(widget.myeleve)
+    });
 }
+
+widget.openLightBox = function(contentType, myeleve){
+    widget.currentContentType = contentType
+    widget.currentEleve = myeleve
+    widget.showLightbox = true
+}
+
+
+
+//console.log(eleve)
+
 
 http().get('/sso/pronote')
     .done(function(structures){
@@ -258,13 +283,10 @@ http().get('/sso/pronote')
             var serviceUrl = structure.address;
             var xmlDocument = $.parseXML(structure.xmlResponse);
             var $xml = $(xmlDocument);
-            //console.log(xml);
-            //console.log($xml.find('Eleve').first().attr('sessionENT'));
-
             widget.eleves = widget.eleves.concat($.makeArray($xml.find('Eleve')));
-            // widget.eleves.forEach(function(eleve){
-            //
-            // })
+            if(!widget.myeleve){
+                widget.getEleve(widget.eleves[0])
+            }
         });
 
     model.widgets.apply();
