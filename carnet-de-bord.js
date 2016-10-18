@@ -1,7 +1,4 @@
-// var basePath = skin.basePath + '../../widgets/carnet-de-bord/';
-//
-// var widget = model.widgets.findWidget("carnet-de-bord");
-//
+
 // //http().get(basePath + 'js/' + model.me.type.toLowerCase() + '.js').done(function(data){
 // http().get('/sso/pronote').done(function(data){
 //
@@ -10,6 +7,25 @@
 //     console.log(data);
 // })
 
+// widget.parentInfos = function(){
+//     return widget.model.me.childrenIds
+// }
+
+// childrenIds = widget.model.me.childrenIds
+// //console.log(childrenIds)
+//
+// childrenIds.forEach(function(childId){
+//     var avatarUrl = "/userbook/avatar/" + childId + "?thumbnail=100x100"
+//
+//     http().get('/userbook/api/person?id='+childId)
+//         .done(function(childInfos){
+//
+//             widget.childInfos = childInfos;
+//             var displayName = childInfos.result.0.displayName
+//             var schoolName = childInfos.result.0.schools[0].name
+//
+//         });
+// })
 
 var widget = model.widgets.findWidget("carnet-de-bord");
 widget.model = model;
@@ -18,13 +34,16 @@ widget.getTag = function(tagName, xml){
     return $(xml).find(tagName).text()
 }
 
-// widget.parentInfos = function(){
-//     return widget.model.me.childrenIds
-// }
-// http().get('/userbook/api/person?id='+childId)
-//     .done(function(childInfos){
-//         });
-// })
+
+
+widget.getSession = function(){
+    if(widget.model.me.type != 'ELEVE')
+        return $(widget.parentTag).attr('sessionENT')
+    if(widget.model.me.type === 'ELEVE')
+        return $(widget.myeleve).attr('sessionENT')
+}
+
+
 
 widget.contentTypes = [
     {
@@ -44,11 +63,13 @@ widget.contentTypes = [
             if (delays) {
                 delays.each(function(i, delay){
                     if($(delay).text() === 'false'){
+                        var pageUrl = $(delay).parent().attr('page');
                         latedate = $(delay).parent().find('Date').text()
                         latedate = moment(latedate);
                         latedate = lang.translate('logBook.the')+" "+latedate.format('DD/MM/YYYY - HH:mm');
                         allDelays.push({
-                            value : latedate
+                            value : latedate,
+                            pageUrl : pageUrl
                         });
                         that.compact = allDelays[0].value
                     }
@@ -77,6 +98,8 @@ widget.contentTypes = [
 
                     if($(absence).text() === 'false'){
 
+                        var pageUrl = $(absence).parent().attr('page');
+
                         if($(absence).parent().find('EstOuverte').text()==="false"){
                             // du... au...
                             var startdate = $(absence).parent().find('DateDebut').text();
@@ -94,7 +117,8 @@ widget.contentTypes = [
                             absDate = lang.translate('logBook.the')+" "+  absDate;
                         }
                         allAbsences.push({
-                            value : absDate
+                            value : absDate,
+                            pageUrl : pageUrl
                         });
                         that.compact = allAbsences[0].value
                     }
@@ -122,6 +146,7 @@ widget.contentTypes = [
                 var lastNotes = $(myeleve).find('PageReleveDeNotes Devoir')
 
                 lastNotes.each(function(i, result){
+                    var pageUrl = $(result).attr('page');
                     var note = $(result).find('Note').text();
                     var bareme = $(result).find('Bareme').text();
                     var matiere = $(result).find('Matiere').text();
@@ -130,7 +155,8 @@ widget.contentTypes = [
                     var grade = note+"/"+bareme+" "+lang.translate('logBook.in')+" "+matiere+" "+lang.translate('logBook.the')+" "+notedate;
 
                     allGrades.push({
-                        value : grade
+                        value : grade,
+                        pageUrl : pageUrl
                     });
                     that.compact = allGrades[0].value
 
@@ -160,6 +186,7 @@ widget.contentTypes = [
                 $(diaries).each(function(i, diary){
                     if ($(diary).find('TravailAFaire Descriptif').text()) {
 
+                        var pageUrl = $(diary).attr('page');
                         var matiere = lang.translate('logBook.new.homework')+" "+$(diary).find('Matiere').text()
                         var works = $(diary).find('TravailAFaire');
                         var subsections = []
@@ -180,7 +207,8 @@ widget.contentTypes = [
 
                         allWorks.push({
                             value: matiere,
-                            subsections: subsections
+                            subsections: subsections,
+                            pageUrl: pageUrl
                         });
                         that.compact = allWorks[0].value+" "+allWorks[0].subsections[0].header
                     }
@@ -205,11 +233,12 @@ widget.contentTypes = [
             that.full = false;
 
             var isSkill = $(myeleve).find('PageCompetences Competence').text();
-//  !!! if Item
+
             if (isSkill) {
                 var skills = $(myeleve).find('PageCompetences Competence').parent()
                 skills.each(function(i, skill){
                     if ($(skill).find('Libelle').text()==="Acquis") {
+                        var pageUrl = $(skill).attr('page')
                         var title = $(skill).find('Intitule').text()
                         var competence = $(skill).find('Competence').text()+" "
                         var item = $(skill).find('Item').text()+" "
@@ -218,15 +247,12 @@ widget.contentTypes = [
                         var skillDate = moment($(skill).find('Date').text());
                         skillDate = skillDate.format('DD/MM/YYYY');
 
-                        //var lastSkill = lang.translate('logBook.the')+" "+skillDate
-
                         var headskill = lang.translate('logBook.skills')+" "
                         var headitem = lang.translate('logBook.skills.item')+" "
 
                         var fullTitle = title +" "+lang.translate('logBook.the')+" "+skillDate
 
                         if(matiere){
-                        //    lastSkill = lastSkill+" "+lang.translate('logBook.in')+" "+matiere
                             fullTitle = fullTitle+" "+lang.translate('logBook.in')+" "+matiere
                         }
 
@@ -243,7 +269,8 @@ widget.contentTypes = [
                         }
                         allSkills.push({
                             value: fullTitle,
-                            subsections: subsections
+                            subsections: subsections,
+                            pageUrl: pageUrl
                         });
                         that.compact = allSkills[0].value
                     }
@@ -270,24 +297,25 @@ widget.openLightBox = function(contentType, myeleve){
     widget.showLightbox = true
 }
 
-
-
-//console.log(eleve)
-
-
 http().get('/sso/pronote')
     .done(function(structures){
         widget.structures = structures;
         widget.eleves = []
         structures.forEach(function(structure){
-            var serviceUrl = structure.address;
+            widget.structureAddress = structure.address;
+            widget.structureId = structure.structureId;
             var xmlDocument = $.parseXML(structure.xmlResponse);
             var $xml = $(xmlDocument);
+            widget.parentTag = $xml.find('Parent')
             widget.eleves = widget.eleves.concat($.makeArray($xml.find('Eleve')));
             if(!widget.myeleve){
                 widget.getEleve(widget.eleves[0])
             }
         });
 
-    model.widgets.apply();
-})
+        model.widgets.apply();
+    })
+    .error(function(errorMsg){
+        widget.errorMsg = JSON.parse(errorMsg.responseText);
+        model.widgets.apply();
+    });

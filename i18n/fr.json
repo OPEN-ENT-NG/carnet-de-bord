@@ -1,5 +1,6 @@
 {
     "logBook.title": "Carnet de bord",
+    "logBook.deny": "Vous n'avez pas accès à Pronote",
     "logBook.empty": "vide",
 
     "logBook.lateness": "Retards non justifiés",
@@ -20,6 +21,8 @@
     "logBook.diary.tooltip": "Voir tous les devoirs",
     "logBook.skills.tooltip": "Voir toutes les compétences aquises",
 
+    "logBook.target.tooltip": "Voir sur l'application",
+
     "logBook.skills.item": "Contenu de l'item",
 
     "logBook.of": "de",
@@ -29,5 +32,10 @@
     "logBook.to": "au",
     "logBook.since": "depuis le",
     "logBook.for": "pour le",
-    "logBook.new.homework": "Travail en"
+    "logBook.new.homework": "Travail en",
+
+    "pronote.unregistered.error": "Vous n’avez pas accès à l’application Pronote.",
+    "pronote.uri.error": "L’adresse du serveur Pronote n’est pas correctement renseignée dans la console d’administration de l’ENT.",
+    "pronote.access.error": "Problème de connexion au serveur Pronote",
+    "pronote.connection.error": "Problème de connexion au serveur Pronote"
 }
