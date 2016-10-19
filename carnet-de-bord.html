@@ -3,17 +3,13 @@
     <h1><i18n>logBook.title</i18n></h1>
 
     <div class="logbook-child" ng-if="widget.model.me.profiles.indexOf('Relative') >= 0 && widget.eleves.length === 1 && widget.structures">
-        i'm parent, got one child
         <div class="avatar selected">
             <figure>
-                <i class="default"></i>
-                <!-- <img ng-src="/userbook/avatar/9955206b-b92d-4af1-9e50-c7a83c76920a?thumbnail=100x100"/> -->
+                <img ng-src="/userbook/avatar/[[ widget.getChildId(widget.myeleve) ]]?thumbnail=100x100"/>
             </figure>
             <div>
-                <span>[[ widget.getTag('Prenom', eleve) ]]</span><span>[[ widget.getTag('Nom', eleve) ]]</span>
+                <span>[[ widget.getTag('Prenom', widget.myeleve) ]]</span> <span> [[ widget.getTag('Nom', widget.myeleve) ]]</span>
             </div>
-            <!-- etabName -->
-            <!-- <div>[[ widget.userInfos()]]</div> -->
         </div>
     </div>
 
@@ -26,8 +22,7 @@
                 ng-class="{'selected': widget.getTag('Prenom', eleve) === widget.getTag('Prenom', widget.myeleve) }" >
 
                  <figure>
-                     <i class="default"></i>
-                     <!-- <img ng-src="/userbook/avatar/9955206b-b92d-4af1-9e50-c7a83c76920a?thumbnail=100x100"/> -->
+                     <img ng-src="/userbook/avatar/[[ widget.getChildId(eleve) ]]?thumbnail=100x100"/>
                  </figure>
                  <div>
                      <span>[[ widget.getTag('Prenom', eleve) ]]</span>
@@ -35,7 +30,6 @@
             </li>
         </ul>
     </div>
-
 
     <div class="logbook-content">
         <p class="info" ng-if="!widget.structures"

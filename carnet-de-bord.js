@@ -1,32 +1,4 @@
 
-// //http().get(basePath + 'js/' + model.me.type.toLowerCase() + '.js').done(function(data){
-// http().get('/sso/pronote').done(function(data){
-//
-//     var f = new Function('widget', data);
-//     f(widget);
-//     console.log(data);
-// })
-
-// widget.parentInfos = function(){
-//     return widget.model.me.childrenIds
-// }
-
-// childrenIds = widget.model.me.childrenIds
-// //console.log(childrenIds)
-//
-// childrenIds.forEach(function(childId){
-//     var avatarUrl = "/userbook/avatar/" + childId + "?thumbnail=100x100"
-//
-//     http().get('/userbook/api/person?id='+childId)
-//         .done(function(childInfos){
-//
-//             widget.childInfos = childInfos;
-//             var displayName = childInfos.result.0.displayName
-//             var schoolName = childInfos.result.0.schools[0].name
-//
-//         });
-// })
-
 var widget = model.widgets.findWidget("carnet-de-bord");
 widget.model = model;
 
@@ -34,7 +6,23 @@ widget.getTag = function(tagName, xml){
     return $(xml).find(tagName).text()
 }
 
+widget.getChildId = function(eleve){
+    var xmlFirstName = widget.getTag('Prenom', eleve);
+    var xmlLastName = widget.getTag('Nom', eleve);
 
+    // for(var id in model.me.children){
+    //    if(model.me.children[id].firstName === xmlFirstName && model.me.children[id].lastName === xmlLastName){
+    //        return id;
+    //    }
+    // }
+
+    return _.findWhere(
+        _.map(model.me.children, function(child, id){
+            child.id = id;
+			return child;
+	    })
+    , { firstName: xmlFirstName, lastName: xmlLastName }).id;
+}
 
 widget.getSession = function(){
     if(widget.model.me.type != 'ELEVE')
