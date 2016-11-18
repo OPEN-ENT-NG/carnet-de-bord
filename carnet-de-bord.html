@@ -21,9 +21,13 @@
                 ng-click="widget.getEleve(eleve)"
                 ng-class="{'selected': widget.getTag('Prenom', eleve) === widget.getTag('Prenom', widget.myeleve) }" >
 
-                 <figure>
+                 <figure ng-if="widget.getChildId(eleve)">
                      <img ng-src="/userbook/avatar/[[ widget.getChildId(eleve) ]]?thumbnail=100x100"/>
                  </figure>
+                 <figure ng-if="!widget.getChildId(eleve)">
+                     <img skin-src="/img/illustrations/no-avatar.jpg?thumbnail=100x100"/>
+                 </figure>
+
                  <div>
                      <span>[[ widget.getTag('Prenom', eleve) ]]</span>
                  </div>
