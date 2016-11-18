@@ -6,6 +6,14 @@ widget.getTag = function(tagName, xml){
     return $(xml).find(tagName).text()
 }
 
+widget.userStatus = function(){
+    if(widget.model.me.profiles.indexOf('Relative') >= 0){
+        return 'parent'
+    }else{
+        return 'eleve'
+    }
+}
+
 widget.getChildId = function(eleve){
     var xmlFirstName = widget.getTag('Prenom', eleve);
     var xmlLastName = widget.getTag('Nom', eleve);

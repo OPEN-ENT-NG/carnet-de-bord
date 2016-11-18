@@ -86,20 +86,20 @@
                     <p class="" ng-if="!item.subsections">
                         <span>•</span>[[ item.value ]]
 
-                        <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/eleve.html?page=[[ item.pageUrl ]]">
+                        <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?page=[[ item.pageUrl ]]">
                             <i class="new-tab"></i>
                         </a>
-                        <!-- <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/eleve.html?sessionENT=[[ widget.getSession() ]]&page=[[ item.pageUrl ]]">
+                        <!-- <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?sessionENT=[[ widget.getSession() ]]&page=[[ item.pageUrl ]]">
                             <i class="new-tab"></i>
                         </a> -->
                     </p>
 
                     <h4 ng-if="item.subsections">
                         [[ item.value ]]
-                        <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/eleve.html?page=[[ item.pageUrl ]]">
+                        <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?page=[[ item.pageUrl ]]">
                             <i class="new-tab"></i>
                         </a>
-                        <!-- <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/eleve.html?sessionENT=[[ widget.getSession() ]]&page=[[ item.pageUrl ]]">
+                        <!-- <a ng-if="item.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?sessionENT=[[ widget.getSession() ]]&page=[[ item.pageUrl ]]">
                             <i class="new-tab"></i>
                         </a> -->                    </h4>
                     <div ng-if="item.subsections">
