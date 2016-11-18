@@ -10,18 +10,19 @@ widget.getChildId = function(eleve){
     var xmlFirstName = widget.getTag('Prenom', eleve);
     var xmlLastName = widget.getTag('Nom', eleve);
 
-    // for(var id in model.me.children){
-    //    if(model.me.children[id].firstName === xmlFirstName && model.me.children[id].lastName === xmlLastName){
-    //        return id;
-    //    }
-    // }
+    for(var id in model.me.children){
+       if(model.me.children[id].firstName === xmlFirstName && model.me.children[id].lastName === xmlLastName){
+           return id;
+       }
+    }
 
-    return _.findWhere(
-        _.map(model.me.children, function(child, id){
-            child.id = id;
-			return child;
-	    })
-    , { firstName: xmlFirstName, lastName: xmlLastName }).id;
+    // return _.findWhere(
+    //     _.map(model.me.children, function(child, id){
+    //         child.id = id;
+	// 		return child;
+	//     })
+    // , { firstName: xmlFirstName, lastName: xmlLastName }).id;
+    //
 }
 
 widget.getSession = function(){
