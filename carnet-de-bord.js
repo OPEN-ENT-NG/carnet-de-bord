@@ -9,9 +9,17 @@ widget.getTag = function(tagName, xml){
 widget.getChildId = function(eleve){
     var xmlFirstName = widget.getTag('Prenom', eleve);
     var xmlLastName = widget.getTag('Nom', eleve);
+    xmlFirstName = xmlFirstName.toLowerCase();
+    xmlLastName = xmlLastName.toLowerCase();
 
     for(var id in model.me.children){
-       if(model.me.children[id].firstName === xmlFirstName && model.me.children[id].lastName === xmlLastName){
+
+        var modelFname = model.me.children[id].firstName
+        var modelLname = model.me.children[id].lastName
+        modelFname = modelFname.toLowerCase();
+        modelLname = modelLname.toLowerCase();
+
+       if(modelFname === xmlFirstName && modelLname === xmlLastName){
            return id;
        }
     }
