@@ -202,7 +202,8 @@ widget.contentTypes = [
                             var delivdate = moment($(work).find('PourLe').text())
                             delivdate = delivdate.format('DD/MM/YYYY');
                             delivdate = lang.translate('logBook.for')+" "+delivdate
-                            var descr = $(work).find('Descriptif').text();
+                            var descr = $(work).find('Descriptif');
+                            descr = descr.html(descr.text()).text();
 
                             subsections.push({
                                 header: delivdate,
