@@ -104,7 +104,11 @@
                         </a> -->                    </h4>
                     <div ng-if="item.subsections">
                         <section ng-repeat="subsection in item.subsections">
-                            <b>[[ subsection.header ]]</b> <br>
+                            <b>[[ subsection.header ]]</b>
+                            <a ng-if="subsection.pageUrl" class="right-magnet" target="_blank" tooltip="logBook.target.tooltip" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?page=[[ subsection.pageUrl ]]">
+                                <i class="new-tab"></i>
+                            </a>
+                            <br>
                             <span>
                                 [[ subsection.content ]]
                             </span>

@@ -191,13 +191,13 @@ widget.contentTypes = [
                 $(diaries).each(function(i, diary){
                     if ($(diary).find('TravailAFaire Descriptif').text()) {
 
-                        var pageUrl = $(diary).parent().attr('page');
                         var matiere = lang.translate('logBook.new.homework')+" "+$(diary).find('Matiere').text()
                         var works = $(diary).find('TravailAFaire');
                         var subsections = []
 
                         $(works).each(function(i, work){
 
+                            var pageUrl = $(work).attr('page');
                             var matiereFirst = $(work).parent().find('Matiere').text()
                             var delivdate = moment($(work).find('PourLe').text())
                             delivdate = delivdate.format('DD/MM/YYYY');
@@ -207,14 +207,14 @@ widget.contentTypes = [
 
                             subsections.push({
                                 header: delivdate,
-                                content: descr
+                                content: descr,
+                                pageUrl: pageUrl
                             })
                         })
 
                         allWorks.push({
                             value: matiere,
-                            subsections: subsections,
-                            pageUrl: pageUrl
+                            subsections: subsections
                         });
                         that.compact = allWorks[0].value+" "+allWorks[0].subsections[0].header
                     }
