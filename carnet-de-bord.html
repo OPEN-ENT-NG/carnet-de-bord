@@ -101,7 +101,7 @@
                         [[ item.value ]]
                     </h4>
                     <h4 ng-if="item.subsections && item.pageUrl">
-                        <a class="right-magnet" target="_blank" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?page=[[ item.pageUrl ]]">
+                        <a target="_blank" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?page=[[ item.pageUrl ]]">
                             [[ item.value ]]
                             <i class="new-tab right-magnet" tooltip="logBook.target.tooltip"></i>
                         </a>
@@ -113,8 +113,9 @@
                             <b ng-if="!subsection.pageUrl">[[ subsection.header ]]</b>
 
                             <a ng-if="subsection.pageUrl" target="_blank" href="[[widget.structureAddress]]/[[widget.userStatus()]].html?page=[[ subsection.pageUrl ]]">
-                                <b>[[ subsection.header ]]</b>
-                                <i class="new-tab right-magnet" tooltip="logBook.target.tooltip"></i>
+                                <b>[[ subsection.header ]]
+                                    <i class="new-tab right-magnet" tooltip="logBook.target.tooltip"></i>
+                                </b>
                             </a>
 
                             <br>
