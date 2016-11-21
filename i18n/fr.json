@@ -9,11 +9,11 @@
     "logBook.diary": "Cahier de textes",
     "logBook.skills": "Compétences aquises",
 
-    "logBook.lateness.all": "Tous les retards non justifiés",
-    "logBook.absences.all": "Toutes les absences non justifiées",
-    "logBook.grades.all": "Toutes les notes",
-    "logBook.diary.all": "Tous les devoirs",
-    "logBook.skills.all": "Toutes les compétences aquises",
+    "logBook.lateness.all": "Les derniers retards non justifiés",
+    "logBook.absences.all": "Les dernières absences non justifiées",
+    "logBook.grades.all": "Les dernières notes",
+    "logBook.diary.all": "Les derniers devoirs",
+    "logBook.skills.all": "Les dernières compétences aquises",
 
     "logBook.lateness.tooltip": "Voir tous les retards non justifiés",
     "logBook.absences.tooltip": "Voir toutes les absences non justifiées",
