@@ -191,7 +191,7 @@ widget.contentTypes = [
                 $(diaries).each(function(i, diary){
                     if ($(diary).find('TravailAFaire Descriptif').text()) {
 
-                        var pageUrl = $(diary).attr('page');
+                        var pageUrl = $(diary).parent().attr('page');
                         var matiere = lang.translate('logBook.new.homework')+" "+$(diary).find('Matiere').text()
                         var works = $(diary).find('TravailAFaire');
                         var subsections = []
