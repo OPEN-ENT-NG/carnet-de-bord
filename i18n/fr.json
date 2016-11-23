@@ -1,7 +1,7 @@
 {
     "logBook.title": "Carnet de bord",
     "logBook.deny": "Vous n'avez pas accès à Pronote",
-    "logBook.empty": "vide",
+    "logBook.empty": " _ ",
 
     "logBook.lateness": "Retards non justifiés",
     "logBook.absences": "Absences non justifiées",
