@@ -2,8 +2,18 @@
 var widget = model.widgets.findWidget("carnet-de-bord");
 widget.model = model;
 
-widget.getTag = function(tagName, xml){
-    return $(xml).find(tagName).text()
+widget.getTag = function(tagName, index){
+    if (index < widget.eleves.length) {
+        return $(widget.eleves[index]).find(tagName).text()
+    }
+    return "";
+}
+
+widget.getMyStudentTag = function(tagName){
+    if (widget.myeleve) {
+        return $(widget.myeleve).find(tagName).text()
+    }
+    return "";
 }
 
 widget.userStatus = function(){
@@ -14,9 +24,9 @@ widget.userStatus = function(){
     }
 }
 
-widget.getChildId = function(eleve){
-    var xmlFirstName = widget.getTag('Prenom', eleve);
-    var xmlLastName = widget.getTag('Nom', eleve);
+widget.getChildId = function(index){
+    var xmlFirstName = widget.getTag('Prenom', index);
+    var xmlLastName = widget.getTag('Nom', index);
     xmlFirstName = xmlFirstName.toLowerCase();
     xmlLastName = xmlLastName.toLowerCase();
 
@@ -290,16 +300,18 @@ widget.contentTypes = [
 
 widget.showLightbox = false
 
-widget.getEleve = function(eleve){
-    widget.myeleve = eleve
-    widget.contentTypes.forEach(function(type){
-       type.getContent(widget.myeleve)
-    });
+widget.getEleve = function(index){
+    if (index < widget.eleves.length) {
+        widget.myeleve = widget.eleves[index];
+        widget.contentTypes.forEach(function(type){
+            type.getContent(widget.myeleve)
+        });
+    }
 }
 
-widget.openLightBox = function(contentType, myeleve){
+widget.openLightBox = function(contentType){
     widget.currentContentType = contentType
-    widget.currentEleve = myeleve
+    widget.currentEleve = widget.myeleve
     widget.showLightbox = true
 }
 
@@ -314,8 +326,9 @@ http().get('/sso/pronote')
             var $xml = $(xmlDocument);
             widget.parentTag = $xml.find('Parent')
             widget.eleves = widget.eleves.concat($.makeArray($xml.find('Eleve')));
-            if(!widget.myeleve){
-                widget.getEleve(widget.eleves[0])
+            //console.log(widget.eleves);
+            if(!widget.myeleve && widget.eleves.length > 0){
+                widget.getEleve(0)
             }
         });
 

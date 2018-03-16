@@ -4,11 +4,14 @@
 
     <div class="logbook-child" ng-if="widget.model.me.profiles.indexOf('Relative') >= 0 && widget.eleves.length === 1 && widget.structures">
         <div class="avatar selected">
-            <figure>
-                <img ng-src="/userbook/avatar/[[ widget.getChildId(widget.myeleve) ]]?thumbnail=100x100"/>
+            <figure ng-if="widget.getChildId(0)">
+                <img ng-src="/userbook/avatar/[[ widget.getChildId(0) ]]?thumbnail=100x100"/>
+            </figure>
+            <figure ng-if="!widget.getChildId(0)">
+                <img skin-src="/img/illustrations/no-avatar.svg?thumbnail=100x100"/>
             </figure>
             <div>
-                <span>[[ widget.getTag('Prenom', widget.myeleve) ]]</span> <span> [[ widget.getTag('Nom', widget.myeleve) ]]</span>
+                <span>[[ widget.getMyStudentTag('Prenom') ]]</span> <span> [[ widget.getMyStudentTag('Nom') ]]</span>
             </div>
         </div>
     </div>
@@ -18,18 +21,17 @@
         <ul>
             <li class="avatar"
                 ng-repeat="eleve in widget.eleves"
-                ng-click="widget.getEleve(eleve)"
-                ng-class="{'selected': widget.getTag('Prenom', eleve) === widget.getTag('Prenom', widget.myeleve) }" >
-
-                 <figure ng-if="widget.getChildId(eleve)">
-                     <img ng-src="/userbook/avatar/[[ widget.getChildId(eleve) ]]?thumbnail=100x100"/>
+                ng-click="widget.getEleve($index)"
+                ng-class="{'selected': widget.getTag('Prenom', $index) === widget.getMyStudentTag('Prenom') }" >
+                <figure ng-if="widget.getChildId($index)">
+                    <img ng-src="/userbook/avatar/[[ widget.getChildId($index) ]]?thumbnail=100x100"/>
                  </figure>
-                 <figure ng-if="!widget.getChildId(eleve)">
-                     <img skin-src="/img/illustrations/no-avatar.jpg?thumbnail=100x100"/>
+                <figure ng-if="!widget.getChildId($index)">
+                     <img skin-src="/img/illustrations/no-avatar.svg?thumbnail=100x100"/>
                  </figure>
 
                  <div>
-                     <span>[[ widget.getTag('Prenom', eleve) ]]</span>
+                    <span>[[ widget.getTag('Prenom', $index) ]]</span>
                  </div>
             </li>
         </ul>
@@ -45,7 +47,7 @@
             <div class="ticket-card"
                 ng-class="{'empty': !contentType.compact }"
                 ng-repeat="contentType in widget.contentTypes"
-                ng-click="widget.openLightBox(contentType, widget.myeleve)">
+                ng-click="widget.openLightBox(contentType)">
 
                 <figure ng-class="'shade-color-'+$index">
                     <i class="[[contentType.icon]]"></i>
@@ -76,7 +78,7 @@
 
                 <span ng-if="widget.model.me.type != 'ELEVE' ">
                     <i18n>logBook.of</i18n>
-                    [[widget.getTag('Prenom', widget.myeleve)]]
+                    [[widget.getMyStudentTag('Prenom')]]
                 </span>
             </h2>
 
