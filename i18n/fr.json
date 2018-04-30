@@ -1,30 +1,24 @@
 {
     "logBook.title": "Carnet de bord",
     "logBook.deny": "Vous n'avez pas accès à Pronote",
-    "logBook.empty": " _ ",
-
+    "logBook.empty": "vide",
     "logBook.lateness": "Retards non justifiés",
     "logBook.absences": "Absences non justifiées",
     "logBook.grades": "Notes",
     "logBook.diary": "Cahier de textes",
-    "logBook.skills": "Compétences aquises",
-
-    "logBook.lateness.all": "Les derniers retards non justifiés",
-    "logBook.absences.all": "Les dernières absences non justifiées",
-    "logBook.grades.all": "Les dernières notes",
-    "logBook.diary.all": "Les derniers devoirs",
-    "logBook.skills.all": "Les dernières compétences aquises",
-
+    "logBook.skills": "Compétences acquises",
+    "logBook.lateness.all": "Tous les retards non justifiés",
+    "logBook.absences.all": "Toutes les absences non justifiées",
+    "logBook.grades.all": "Toutes les notes",
+    "logBook.diary.all": "Tous les devoirs",
+    "logBook.skills.all": "Toutes les compétences acquises",
     "logBook.lateness.tooltip": "Voir tous les retards non justifiés",
     "logBook.absences.tooltip": "Voir toutes les absences non justifiées",
     "logBook.grades.tooltip": "Voir toutes les notes",
     "logBook.diary.tooltip": "Voir tous les devoirs",
-    "logBook.skills.tooltip": "Voir toutes les compétences aquises",
-
+    "logBook.skills.tooltip": "Voir toutes les compétences acquises",
     "logBook.target.tooltip": "Voir sur l'application",
-
     "logBook.skills.item": "Contenu de l'item",
-
     "logBook.of": "de",
     "logBook.in": "en",
     "logBook.the": "le",
@@ -33,9 +27,8 @@
     "logBook.since": "depuis le",
     "logBook.for": "pour le",
     "logBook.new.homework": "Travail en",
-
-    "pronote.unregistered.error": "Vous n’avez pas accès à l’application Pronote.",
-    "pronote.uri.error": "L’adresse du serveur Pronote n’est pas correctement renseignée dans la console d’administration de l’ENT.",
+    "pronote.unregistered.error": "Vous n'avez pas accès à l'application Pronote.",
+    "pronote.uri.error": "L'adresse du serveur Pronote n’est pas correctement renseignée dans la console d’administration de l’ENT.",
     "pronote.access.error": "Problème de connexion au serveur Pronote",
     "pronote.connection.error": "Problème de connexion au serveur Pronote"
 }
