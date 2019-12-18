@@ -28,7 +28,7 @@
     "logBook.for": "pour le",
     "logBook.new.homework": "Travail en",
     "pronote.unregistered.error": "Vous n'avez pas accès à l'application Pronote.",
-    "pronote.uri.error": "L'adresse du serveur Pronote n’est pas correctement renseignée dans la console d’administration de l’ENT.",
+    "pronote.uri.error": "L'adresse du serveur Pronote n'est pas correctement renseignée dans la console d’administration de l'ENT.",
     "pronote.access.error": "Problème de connexion au serveur Pronote",
     "pronote.connection.error": "Problème de connexion au serveur Pronote"
 }
