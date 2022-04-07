@@ -1,8 +1,8 @@
-# À propos de l'application Rbs
+# À propos de l'application Carnet de bord
 
-* Licence : [AGPL v3](http://www.gnu.org/licenses/agpl.txt) - Copyright Conseil Régional Nord Pas de Calais - Picardie 
+* Licence : [AGPL v3](http://www.gnu.org/licenses/agpl.txt) - Copyright Région Hauts-de-France (ex Picardie)
 * Développeur(s) : ODE
-* Financeur(s) : Région Nord Pas de Calais-Picardie
+* Financeur(s) : Région Hauts-de-France (ex Picardie)
 * Description : Carnet de Bord vie scolaire (Pronote uniquement)
 
 # Documentation technique
