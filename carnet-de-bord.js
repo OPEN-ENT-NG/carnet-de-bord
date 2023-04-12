@@ -176,7 +176,7 @@ widget.contentTypes = [
                     that.compact = allGrades[0].value
 
                 })
-                that.full = allGrades
+                that.full = allGrades.reverse()
             }
 
         },
