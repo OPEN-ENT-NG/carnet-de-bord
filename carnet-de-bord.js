@@ -196,7 +196,7 @@ widget.contentTypes = [
 
             var iswork = $(myeleve).find('PageCahierDeTextes CahierDeTextes TravailAFaire Descriptif').text()
             if (iswork) {
-
+                var parser = new DOMParser();
                 var diaries = $(myeleve).find('PageCahierDeTextes CahierDeTextes');
                 $(diaries).each(function(i, diary){
                     if ($(diary).find('TravailAFaire Descriptif').text()) {
@@ -213,7 +213,10 @@ widget.contentTypes = [
                             delivdate = delivdate.format('DD/MM/YYYY');
                             delivdate = lang.translate('logBook.for')+" "+delivdate
                             var descr = $(work).find('Descriptif');
-                            descr = descr.html(descr.text()).text();
+                            //can throw a DOMException
+                            //descr = descr.html(descr.text()).text();
+                            var doc = parser.parseFromString(descr.text(), 'text/html');
+                            descr = doc.documentElement.textContent;
 
                             subsections.push({
                                 header: delivdate,
